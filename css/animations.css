@@ -1,0 +1,89 @@
+/* Dynamic classes for animations applied via JavaScript */
+
+/* Sorting & Searching Colors */
+.comparing {
+    background-color: var(--yellow-anim) !important;
+    color: #000 !important;
+}
+
+.swapping {
+    background-color: var(--red-anim) !important;
+}
+
+.sorted {
+    background-color: var(--green-anim) !important;
+}
+
+.found {
+    background-color: var(--green-anim) !important;
+    color: white !important;
+    animation: popScale 0.3s ease;
+}
+
+.not-found {
+    background-color: var(--red-anim) !important;
+    color: white !important;
+}
+
+/* Stack and Queue Animations */
+.item-enter {
+    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.item-exit {
+    animation: slideOut 0.3s forwards;
+}
+
+.highlighted {
+    background-color: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
+}
+
+/* Graph Node States */
+.node-visiting {
+    background-color: var(--yellow-anim) !important;
+    border-color: #ca8a04 !important;
+    color: black !important;
+}
+
+.node-visited {
+    background-color: var(--green-anim) !important;
+    border-color: #047857 !important;
+    color: white !important;
+}
+
+.edge-visited {
+    background-color: var(--primary) !important;
+    height: 3px !important;
+}
+
+/* Keyframes */
+
+@keyframes popScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}

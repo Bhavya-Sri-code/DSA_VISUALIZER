@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Visualizer</title>
+    <meta name="description" content="A comprehensive Data Structures and Algorithms Visualizer.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Epic Landing Page -->
+    <div id="landing-page" class="landing-hero">
+        <div class="hero-left">
+            <h1 class="hero-title">Visualize the <span class="highlight-text">Invisible</span>.</h1>
+            <p class="hero-subtitle">Algorithms govern the digital world. Watch them come to life through interactive, step-by-step animations that turn abstract mathematics into stunning intuition.</p>
+            <div class="hero-metrics">
+                <div class="metric"><strong>5+</strong><span>Sorting Algos</span></div>
+                <div class="metric"><strong>2</strong><span>Search Types</span></div>
+                <div class="metric"><strong>Graph</strong><span>Traversal</span></div>
+            </div>
+            <button id="btn-get-started" class="hero-btn">Enter Workspace</button>
+        </div>
+        
+        <div class="hero-right">
+            <div class="css-array">
+                <div class="bar bar-1"></div>
+                <div class="bar bar-2"></div>
+                <div class="bar bar-3"></div>
+                <div class="bar bar-4"></div>
+                <div class="bar bar-5"></div>
+                <div class="bar bar-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-app" class="app-container" style="display: none;">
+        <!-- Navigation -->
+        <header class="glass-nav">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>DSA Visualizer</h1>
+            </div>
+            <nav class="tabs">
+                <button class="tab-btn active" data-target="sorting">Sorting</button>
+                <button class="tab-btn" data-target="searching">Searching</button>
+                <button class="tab-btn" data-target="stack">Stack</button>
+                <button class="tab-btn" data-target="queue">Queue</button>
+                <button class="tab-btn" data-target="graph">Graph</button>
+            </nav>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            
+            <!-- Sorting View -->
+            <section id="sorting" class="view-section active">
+                <div class="control-panel glass-panel">
+                    <div class="control-group">
+                        <label for="custom-array">Custom Numbers (comma separated):</label>
+                        <input type="text" id="custom-array" placeholder="e.g. 50, 20, 80, 10, 40">
+                        <button id="btn-generate" class="primary-btn">Generate Array</button>
+                    </div>
+                    <div class="control-group">
+                        <label for="algo-select">Algorithm:</label>
+                        <select id="algo-select">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                            <option value="merge">Merge Sort</option>
+                            <option value="quick">Quick Sort</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="speed-slider">Speed:</label>
+                        <input type="range" id="speed-slider" min="10" max="1000" value="300" dir="rtl">
+                    </div>
+                    <div class="control-group actions">
+                        <button id="btn-sort" class="action-btn start">Start Sorting</button>
+                        <button id="btn-reset" class="action-btn danger">Reset</button>
+                    </div>
+                </div>
+
+                <div class="visualizer-container">
+                    <div id="sorting-canvas" class="canvas"></div>
+                    <div class="complexity-info glass-panel" id="sorting-info">
+                        <h3>Algorithm Details</h3>
+                        <p class="time-complexity">Time: <span>-</span></p>
+                        <p class="space-complexity">Space: <span>-</span></p>
+                        <div class="color-legend">
+                            <div><span class="color-box yellow"></span> Comparing</div>
+                            <div><span class="color-box red"></span> Swapping/Moving</div>
+                            <div><span class="color-box green"></span> Sorted</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="execution-log glass-panel">
+                    <h3>Execution Steps</h3>
+                    <div id="sorting-log" class="log-content"></div>
+                </div>
+            </section>
+
+            <!-- Searching View -->
+            <section id="searching" class="view-section hidden">
+                <div class="control-panel glass-panel">
+                    <div class="control-group">
+                        <label>Target Value:</label>
+                        <input type="number" id="search-target" placeholder="Value to find">
+                    </div>
+                    <div class="control-group actions">
+                        <button id="btn-linear-search" class="primary-btn">Linear Search</button>
+                        <button id="btn-binary-search" class="primary-btn">Binary Search</button>
+                        <button id="btn-reset-search" class="action-btn danger">Reset</button>
+                    </div>
+                </div>
+                
+                <div class="visualizer-container">
+                    <div id="searching-canvas" class="canvas"></div>
+                    <div class="complexity-info glass-panel">
+                        <h3 id="search-algo-name">Searching</h3>
+                        <p class="time-complexity" id="search-time">Time: <span>-</span></p>
+                        <div class="color-legend">
+                            <div><span class="color-box yellow"></span> Checking</div>
+                            <div><span class="color-box green"></span> Found</div>
+                            <div><span class="color-box red"></span> Not Found</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="execution-log glass-panel">
+                    <h3>Execution Steps</h3>
+                    <div id="searching-log" class="log-content"></div>
+                </div>
+            </section>
+
+            <!-- Stack View -->
+            <section id="stack" class="view-section hidden">
+                <div class="control-panel glass-panel">
+                    <div class="control-group">
+                        <label>Value:</label>
+                        <input type="number" id="stack-input" placeholder="Number to Push">
+                    </div>
+                    <div class="control-group actions">
+                        <button id="btn-push" class="primary-btn">Push</button>
+                        <button id="btn-pop" class="action-btn warning">Pop</button>
+                        <button id="btn-reset-stack" class="action-btn danger">Clear</button>
+                    </div>
+                </div>
+                <div class="visualizer-container stack-layout">
+                    <div id="stack-canvas" class="canvas flex-col-reverse"></div>
+                    <div class="complexity-info glass-panel">
+                        <h3>Stack Info</h3>
+                        <p>LIFO (Last In First Out)</p>
+                        <p class="time-complexity">Push: O(1)</p>
+                        <p class="space-complexity">Pop: O(1)</p>
+                    </div>
+                </div>
+                <div class="execution-log glass-panel">
+                    <h3>Execution Steps</h3>
+                    <div id="stack-log" class="log-content"></div>
+                </div>
+            </section>
+
+            <!-- Queue View -->
+            <section id="queue" class="view-section hidden">
+                <div class="control-panel glass-panel">
+                    <div class="control-group">
+                        <label>Value:</label>
+                        <input type="number" id="queue-input" placeholder="Number to Enqueue">
+                    </div>
+                    <div class="control-group actions">
+                        <button id="btn-enqueue" class="primary-btn">Enqueue</button>
+                        <button id="btn-dequeue" class="action-btn warning">Dequeue</button>
+                        <button id="btn-reset-queue" class="action-btn danger">Clear</button>
+                    </div>
+                </div>
+                <div class="visualizer-container queue-layout">
+                    <div id="queue-canvas" class="canvas flex-row"></div>
+                    <div class="complexity-info glass-panel">
+                        <h3>Queue Info</h3>
+                        <p>FIFO (First In First Out)</p>
+                        <p class="time-complexity">Enqueue: O(1)</p>
+                        <p class="space-complexity">Dequeue: O(1)</p>
+                    </div>
+                </div>
+                <div class="execution-log glass-panel">
+                    <h3>Execution Steps</h3>
+                    <div id="queue-log" class="log-content"></div>
+                </div>
+            </section>
+
+            <!-- Graph View -->
+            <section id="graph" class="view-section hidden">
+                <div class="control-panel glass-panel align-start">
+                    <div class="graph-instructions">
+                        <p>1. Click on canvas to <b>add nodes</b>.</p>
+                        <p>2. Click a node then another to <b>add an edge</b>.</p>
+                        <p>3. Select a starting node below.</p>
+                    </div>
+                    <div class="control-group">
+                        <label>Start Node ID:</label>
+                        <input type="number" id="graph-start-node" placeholder="0">
+                    </div>
+                    <div class="control-group actions">
+                        <button id="btn-bfs" class="primary-btn">Run BFS</button>
+                        <button id="btn-dfs" class="primary-btn">Run DFS</button>
+                        <button id="btn-reset-graph" class="action-btn danger">Clear</button>
+                    </div>
+                </div>
+                <div class="visualizer-container">
+                    <div id="graph-canvas" class="canvas"></div>
+                    <div class="complexity-info glass-panel">
+                        <h3>Graph Info</h3>
+                        <p>V = Vertices, E = Edges</p>
+                        <p class="time-complexity">BFS: O(V + E)</p>
+                        <p class="space-complexity">DFS: O(V + E)</p>
+                    </div>
+                </div>
+                <div class="execution-log glass-panel">
+                    <h3>Execution Steps</h3>
+                    <div id="graph-log" class="log-content"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/sorting.js"></script>
+    <script src="js/searching.js"></script>
+    <script src="js/stack.js"></script>
+    <script src="js/queue.js"></script>
+    <script src="js/graph.js"></script>
+</body>
+</html>
